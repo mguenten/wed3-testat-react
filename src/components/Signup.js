@@ -76,7 +76,7 @@ class Signup extends React.Component<Props, State> {
         }
 
         return (
-            <Container style={{width: '40%'}}>
+            <Container style={{width: '40%', padding: '5%'}}>
                 <Header as='h1'>Bank of Rapperswil</Header>
                 <Form>
                     <Header as='h2'>Registrieren</Header>

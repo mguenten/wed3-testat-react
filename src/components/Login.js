@@ -64,7 +64,7 @@ class Login extends React.Component<Props, *> {
         }
 
         return (
-            <Container style={{width: '40%'}}>
+            <Container style={{width: '40%', padding: '5%'}}>
                 <Header as='h1'>Bank of Rapperswil</Header>
                 <Form>
                     <Header as='h2'>Login</Header>
