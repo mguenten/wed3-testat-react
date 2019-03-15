@@ -3,7 +3,7 @@
 import React from "react";
 import {Redirect, Link} from "react-router-dom";
 
-import {Header, Container, Segment, Form, Button} from 'semantic-ui-react'
+import {Header, Container, Segment, Form, Input, Button} from 'semantic-ui-react'
 
 export type Props = {
     /* Callback to submit an authentication request to the server */
@@ -69,18 +69,22 @@ class Login extends React.Component<Props, *> {
                 <Form>
                     <Header as='h2'>Login</Header>
                     <Form.Field>
-                        <input
-                            onChange={this.handleLoginChanged}
+                        <Input
+                            icon="user"
+                            iconPosition="left"
                             placeholder="Login"
                             value={this.state.login}
+                            onChange={this.handleLoginChanged}
                         />
                     </Form.Field>
                     <Form.Field>
-                        <input
-                            onChange={this.handlePasswordChanged}
+                        <Input
+                            icon="lock"
+                            iconPosition="left"
                             placeholder="Password"
                             type="password"
                             value={this.state.password}
+                            onChange={this.handlePasswordChanged}
                         />
                     </Form.Field>
                     <Button primary onClick={this.handleSubmit}>Login</Button>
