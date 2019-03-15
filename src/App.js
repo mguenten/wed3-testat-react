@@ -9,7 +9,7 @@ import {
     withRouter
 } from "react-router-dom";
 
-import {Menu, Segment} from 'semantic-ui-react'
+import {Menu, Segment, Header} from 'semantic-ui-react'
 
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -90,8 +90,9 @@ class App extends React.Component<Props, State> {
         const MenuBar = withRouter(({history, location: {pathname}}) => {
             if (isAuthenticated && user) {
                 return (
-                    <Segment inverted style={{borderRadius: 0}}>
-                        <Menu inverted pointing secondary>
+                    <Segment inverted color='blue' style={{borderRadius: 0}}>
+                        <Header as='h1'>Bank of Rapperswil</Header>
+                        <Menu inverted secondary>
                             <Menu.Item
                                 name='home'
                                 active={pathname === '/home'}
