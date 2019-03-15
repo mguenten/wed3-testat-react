@@ -3,6 +3,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import {Header, Container, Segment, Form, Button} from 'semantic-ui-react'
+
 export type Props = {
   isAuthenticated: boolean,
 }
@@ -14,11 +16,11 @@ const Home = ({isAuthenticated}: Props) => (
           <p>Willkommen zurück!</p>
           <Link to={'/dashboard'}>Zum Dashboard</Link>
         </div>
-      : <div>
+      : <Container textAlign='center' style={{padding: '5%'}}>
           <Link to={'/login'}>Einloggen</Link>
           <p>Falls Sie noch keinen Account besitzen können Sie sich hier registrieren:</p>
           <Link to={'/signup'}>Registrieren</Link>
-        </div>
+        </Container>
     }
   </div>
 )
