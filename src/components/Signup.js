@@ -3,7 +3,7 @@
 import React from "react";
 import {Redirect, Link} from "react-router-dom";
 
-import {Header, Container, Form, Button} from 'semantic-ui-react'
+import {Header, Container, Segment, Form, Button} from 'semantic-ui-react'
 
 import {signup} from "../api";
 
@@ -112,7 +112,11 @@ class Signup extends React.Component<Props, State> {
                     <Button primary onClick={this.handleSubmit}>Account eröffnen</Button>
                     <Button secondary onClick={this.handleCancel}>Abbrechen</Button>
                 </Form>
-                {error && <p>Es ist ein Fehler aufgetreten!</p>}
+                {error &&
+                <Segment inverted color='red' textAlign='center'>
+                    <p>Es ist ein Fehler aufgetreten!</p>
+                </Segment>
+                }
             </Container>
         );
     }
