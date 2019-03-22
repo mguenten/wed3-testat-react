@@ -14,13 +14,13 @@ import {Menu, Segment, Header} from 'semantic-ui-react'
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import * as api from "./api";
 import type {User} from "./api";
 
 // TODO: Move to own files
 const AllTransactions = () => <div/>;
-const Dashboard = () => <div/>;
 
 // The following are type definitions for Flow,
 // an optional type checker for JavaScript. You
