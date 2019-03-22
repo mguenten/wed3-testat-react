@@ -9,7 +9,7 @@ import {
     withRouter
 } from "react-router-dom";
 
-import {Menu, Segment, Header} from 'semantic-ui-react'
+import {Menu, Segment, Container, Grid, Header} from 'semantic-ui-react'
 
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -91,7 +91,14 @@ class App extends React.Component<Props, State> {
             if (isAuthenticated && user) {
                 return (
                     <Segment inverted color='blue' style={{borderRadius: 0}}>
-                        <Header as='h1'>Bank of Rapperswil</Header>
+                        <Grid columns={2}>
+                            <Grid.Column>
+                                <Header as='h1' inverted>Bank of Rapperswil</Header>
+                            </Grid.Column>
+                            <Grid.Column verticalAlign='middle'>
+                                <Container textAlign='right' inverted>{user.firstname} {user.lastname} ({user.accountNr})</Container>
+                            </Grid.Column>
+                        </Grid>
                         <Menu inverted secondary>
                             <Menu.Item
                                 name='home'

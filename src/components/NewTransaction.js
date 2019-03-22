@@ -9,6 +9,10 @@ class NewTransaction extends React.Component {
         error: undefined
     };
 
+    handleToValidation = () => {
+
+    }
+
     handleToChanged = (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
             this.setState({to: event.target.value});
