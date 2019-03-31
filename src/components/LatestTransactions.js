@@ -7,7 +7,6 @@ const LatestTransaction = (props) => {
     let transactions = [];
     getTransactions(props.token)
         .then((results) => transactions = results)
-        .then(() => console.log(transactions))
         .catch((error) => console.log(error));
 
     return (

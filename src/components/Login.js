@@ -24,7 +24,7 @@ class Login extends React.Component<Props, *> {
     state = {
         login: "",
         password: "",
-        error: undefined,
+        error: null,
         redirectToReferrer: false
     };
 

@@ -1,27 +1,48 @@
 import React from 'react';
 import * as api from "../api";
-import {Form, Button, Card, Input, Segment} from "semantic-ui-react";
+import {Form, Button, Card, Label, Input, Icon, Segment} from "semantic-ui-react";
 
 class NewTransaction extends React.Component {
+    TO_ERROR_MESSAGE = "Please enter a valid id";
+    AMOUNT_ERROR_MESSAGE = "Please enter a valid amount";
+
     state = {
         to: "",
+        toLabel: this.TO_ERROR_MESSAGE,
         amount: "",
-        error: undefined
+        amountLabel: this.AMOUNT_ERROR_MESSAGE,
+        error: null
     };
 
-    handleToValidation = () => {
-
+    handleToValidation = (userId, token) => {
+        if (userId.length > 6) {
+            api.getAccount(userId, token)
+                .then(result => this.setState({toLabel: result.owner.firstname + " " + result.owner.lastname}))
+                .catch((error) => this.setState({toLabel: this.TO_ERROR_MESSAGE}));
+        } else {
+            this.setState({toLabel: this.TO_ERROR_MESSAGE})
+        }
     }
 
     handleToChanged = (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-            this.setState({to: event.target.value});
+            this.setState({to: event.target.value})
+            this.handleToValidation(event.target.value, this.props.token);
         }
     };
+
+    handleAmountValidation = (amount) => {
+        if (amount > 0) {
+            this.setState({amountLabel: <Icon name='check'/>});
+        } else {
+            this.setState({amountLabel: this.AMOUNT_ERROR_MESSAGE});
+        }
+    }
 
     handleAmountChanged = (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
             this.setState({amount: event.target.value});
+            this.handleAmountValidation(event.target.value);
         }
     };
 
@@ -42,10 +63,10 @@ class NewTransaction extends React.Component {
                     <Form>
                         <Form.Field>
                             <Input
+                                readonly
                                 icon="sign-out"
                                 iconPosition="left"
-                                placeholder="From"
-                                onChange={this.handleLoginChanged}
+                                value={this.props.user.accountNr}
                             />
                         </Form.Field>
                         <Form.Field>
@@ -54,8 +75,9 @@ class NewTransaction extends React.Component {
                                 iconPosition="left"
                                 placeholder="To"
                                 value={this.state.to}
-                                onChange={this.handlePasswordChanged}
+                                onChange={this.handleToChanged}
                             />
+                            <Label pointing>{this.state.toLabel}</Label>
                         </Form.Field>
                         <Form.Field>
                             <Input
@@ -63,8 +85,9 @@ class NewTransaction extends React.Component {
                                 iconPosition="left"
                                 placeholder="Amount"
                                 value={this.state.amount}
-                                onChange={this.handlePasswordChanged}
+                                onChange={this.handleAmountChanged}
                             />
+                            <Label pointing>{this.state.amountLabel}</Label>
                         </Form.Field>
                         <Button primary onClick={this.handleSubmit}>Submit</Button>
                     </Form>

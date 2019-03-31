@@ -19,25 +19,23 @@ class TransactionListElement extends React.Component {
 class TransactionList extends React.Component {
     render(): React.ReactNode {
         return (
-            <Segment placeholder>
-                <Table celled>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>Date</Table.HeaderCell>
-                            <Table.HeaderCell>Source</Table.HeaderCell>
-                            <Table.HeaderCell>Target</Table.HeaderCell>
-                            <Table.HeaderCell>Amount [CHF]</Table.HeaderCell>
-                            <Table.HeaderCell>Balance [CHF]</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
+            <Table celled>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Date</Table.HeaderCell>
+                        <Table.HeaderCell>Source</Table.HeaderCell>
+                        <Table.HeaderCell>Target</Table.HeaderCell>
+                        <Table.HeaderCell>Amount [CHF]</Table.HeaderCell>
+                        <Table.HeaderCell>Balance [CHF]</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
 
-                    <Table.Body>
-                        {this.props.transactions.map(function (transaction) {
-                            return <TransactionListElement transaction={transaction}/>
-                        })}
-                    </Table.Body>
-                </Table>
-            </Segment>
+                <Table.Body>
+                    {this.props.transactions.map(function (transaction) {
+                        return <TransactionListElement transaction={transaction}/>
+                    })}
+                </Table.Body>
+            </Table>
         );
     }
 }

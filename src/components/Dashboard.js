@@ -6,7 +6,7 @@ import LatestTransaction from "./LatestTransactions";
 const Dashboard = (props) => {
     return (
         <Card.Group centered style={{margin: '2%'}}>
-            <NewTransaction/>
+            <NewTransaction {...props}/>
             <LatestTransaction token={props.token}/>
         </Card.Group>
     );
