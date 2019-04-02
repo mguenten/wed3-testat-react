@@ -3,41 +3,49 @@ import * as api from "../api";
 import {Form, Button, Card, Label, Input, Icon, Segment} from "semantic-ui-react";
 
 class NewTransaction extends React.Component {
+    TIMEOUT = 3000;
     TO_ERROR_MESSAGE = "Please enter a valid id";
     AMOUNT_ERROR_MESSAGE = "Please enter a valid amount";
 
     state = {
         to: "",
         toLabel: this.TO_ERROR_MESSAGE,
+        toIsValid: false,
         amount: "",
         amountLabel: this.AMOUNT_ERROR_MESSAGE,
-        error: null
+        amountIsValid: false,
+        success: false,
+        inputError: false,
+        serverError: false
     };
 
     handleToValidation = (userId, token) => {
         if (userId.length > 6) {
             api.getAccount(userId, token)
-                .then(result => this.setState({toLabel: result.owner.firstname + " " + result.owner.lastname}))
-                .catch((error) => this.setState({toLabel: this.TO_ERROR_MESSAGE}));
+                .then(result => this.setState({
+                    toLabel: result.owner.firstname + " " + result.owner.lastname,
+                    toIsValid: true
+                }))
+                .catch(() => this.setState({toLabel: this.TO_ERROR_MESSAGE, toIsValid: false}));
         } else {
-            this.setState({toLabel: this.TO_ERROR_MESSAGE})
+            this.setState({toLabel: this.TO_ERROR_MESSAGE, toIsValid: false})
         }
-    }
+    };
 
     handleToChanged = (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
-            this.setState({to: event.target.value})
+            this.setState({to: event.target.value});
             this.handleToValidation(event.target.value, this.props.token);
         }
     };
 
     handleAmountValidation = (amount) => {
         if (amount > 0) {
-            this.setState({amountLabel: <Icon name='check'/>});
+            this.setState({amountLabel: <Icon name='check'/>, amountIsValid: true});
         } else {
-            this.setState({amountLabel: this.AMOUNT_ERROR_MESSAGE});
+            this.setState({amountLabel: this.AMOUNT_ERROR_MESSAGE, amountIsValid: false});
         }
-    }
+    };
 
     handleAmountChanged = (event: Event) => {
         if (event.target instanceof HTMLInputElement) {
@@ -48,10 +56,32 @@ class NewTransaction extends React.Component {
 
     handleSubmit = (event: Event) => {
         event.preventDefault();
-        const {to, amount} = this.state;
-
+        const {to, toIsValid, amount, amountIsValid} = this.state;
+        if (toIsValid && amountIsValid) {
+            api.transfer(to, amount, this.props.token)
+                .then(() => {
+                    setTimeout(() => this.setState({success: false}), this.TIMEOUT);
+                    this.setState({
+                        to: "",
+                        toLabel: this.TO_ERROR_MESSAGE,
+                        toIsValid: false,
+                        amount: "",
+                        amountLabel: this.AMOUNT_ERROR_MESSAGE,
+                        amountIsValid: false,
+                        success: true,
+                        inputError: false,
+                        serverError: false
+                    });
+                })
+                .catch(() => {
+                    setTimeout(() => this.setState({serverError: false}), this.TIMEOUT);
+                    this.setState({serverError: true});
+                });
+        } else {
+            setTimeout(()=>this.setState({inputError: false}), this.TIMEOUT);
+            this.setState({inputError: true});
+        }
     };
-
 
     render(): React.ReactNode {
         return (
@@ -77,7 +107,9 @@ class NewTransaction extends React.Component {
                                 value={this.state.to}
                                 onChange={this.handleToChanged}
                             />
-                            <Label pointing>{this.state.toLabel}</Label>
+                            <Label pointing color={!this.state.toIsValid && this.state.inputError && 'red'}>
+                                {this.state.toLabel}
+                            </Label>
                         </Form.Field>
                         <Form.Field>
                             <Input
@@ -87,13 +119,20 @@ class NewTransaction extends React.Component {
                                 value={this.state.amount}
                                 onChange={this.handleAmountChanged}
                             />
-                            <Label pointing>{this.state.amountLabel}</Label>
+                            <Label pointing color={!this.state.amountIsValid && this.state.inputError && 'red'}>
+                                {this.state.amountLabel}
+                            </Label>
                         </Form.Field>
                         <Button primary onClick={this.handleSubmit}>Submit</Button>
                     </Form>
-                    {this.state.error &&
+                    {this.state.success &&
+                    <Segment inverted color='green' textAlign='center'>
+                        <p>Transaktion erfolgreich durchgeführt!</p>
+                    </Segment>
+                    }
+                    {this.state.serverError &&
                     <Segment inverted color='red' textAlign='center'>
-                        <p>Es ist ein Fehler aufgetreten!</p>
+                        <p>Es ist ein Serverfehler aufgetreten!</p>
                     </Segment>
                     }
                 </Card.Content>
