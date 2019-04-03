@@ -18,7 +18,7 @@ class TransactionListElement extends React.Component {
 class TransactionList extends React.Component {
     render() {
         return (
-            <Table celled>
+            <Table celled striped size='small'>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>Date</Table.HeaderCell>

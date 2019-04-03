@@ -86,7 +86,7 @@ class NewTransaction extends React.Component {
     render(): React.ReactNode {
         return (
             <Card>
-                <Card.Content>
+                <Card.Content extra='true'>
                     <Card.Header>New Transaction</Card.Header>
                 </Card.Content>
                 <Card.Content>

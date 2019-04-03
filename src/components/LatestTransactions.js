@@ -25,11 +25,11 @@ class LatestTransactions extends React.Component {
         this.getLatestTransactions(this.AMOUNT_OF_ELEMENTS);
         return (
             <Card style={{width: 'auto'}}>
-                <Card.Content>
+                <Card.Content extra='true'>
                     <Card.Header>Latest Transactions</Card.Header>
                 </Card.Content>
                 <Card.Content>
-                    <Container>
+                    <Container text='true'>
                         <TransactionList transactions={this.state.transactions}/>
                     </Container>
                     {this.state.serverError &&
