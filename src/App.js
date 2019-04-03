@@ -96,7 +96,7 @@ class App extends React.Component<Props, State> {
                                 <Header as='h1' inverted>Bank of Rapperswil</Header>
                             </Grid.Column>
                             <Grid.Column verticalAlign='middle'>
-                                <Container textAlign='right' inverted>{user.firstname} {user.lastname} ({user.accountNr})</Container>
+                                <Container textAlign='right' inverted='true'>{user.firstname} {user.lastname} ({user.accountNr})</Container>
                             </Grid.Column>
                         </Grid>
                         <Menu inverted secondary>

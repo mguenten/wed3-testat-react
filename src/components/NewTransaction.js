@@ -86,7 +86,7 @@ class NewTransaction extends React.Component {
     render(): React.ReactNode {
         return (
             <Card>
-                <Card.Content extra='true'>
+                <Card.Content extra={true}>
                     <Card.Header>New Transaction</Card.Header>
                 </Card.Content>
                 <Card.Content>
@@ -107,7 +107,7 @@ class NewTransaction extends React.Component {
                                 value={this.state.to}
                                 onChange={this.handleToChanged}
                             />
-                            <Label pointing color={!this.state.toIsValid && this.state.inputError && 'red'}>
+                            <Label pointing color={!this.state.toIsValid && this.state.inputError ? 'red' : 'grey'}>
                                 {this.state.toLabel}
                             </Label>
                         </Form.Field>
@@ -119,7 +119,7 @@ class NewTransaction extends React.Component {
                                 value={this.state.amount}
                                 onChange={this.handleAmountChanged}
                             />
-                            <Label pointing color={!this.state.amountIsValid && this.state.inputError && 'red'}>
+                            <Label pointing color={!this.state.amountIsValid && this.state.inputError ? 'red' : 'grey'}>
                                 {this.state.amountLabel}
                             </Label>
                         </Form.Field>

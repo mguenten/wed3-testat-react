@@ -30,8 +30,8 @@ class TransactionList extends React.Component {
                 </Table.Header>
 
                 <Table.Body>
-                    {this.props.transactions.map((transaction) => {
-                        return <TransactionListElement transaction={transaction}/>
+                    {this.props.transactions.map((transaction, index) => {
+                        return <TransactionListElement key={index} transaction={transaction}/>
                     })}
                 </Table.Body>
             </Table>
