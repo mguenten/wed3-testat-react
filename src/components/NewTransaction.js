@@ -1,6 +1,6 @@
 import React from 'react';
 import * as api from "../api";
-import {Form, Button, Card, Label, Input, Icon, Segment} from "semantic-ui-react";
+import {Form, Card, Label, Segment, Icon, Input, Button} from "semantic-ui-react";
 
 class NewTransaction extends React.Component {
     TIMEOUT = 3000;
@@ -78,7 +78,7 @@ class NewTransaction extends React.Component {
                     this.setState({serverError: true});
                 });
         } else {
-            setTimeout(()=>this.setState({inputError: false}), this.TIMEOUT);
+            setTimeout(() => this.setState({inputError: false}), this.TIMEOUT);
             this.setState({inputError: true});
         }
     };
@@ -93,7 +93,7 @@ class NewTransaction extends React.Component {
                     <Form>
                         <Form.Field>
                             <Input
-                                readonly
+                                readOnly
                                 icon="sign-out"
                                 iconPosition="left"
                                 value={this.props.user.accountNr}

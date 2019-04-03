@@ -1,12 +1,11 @@
 import React from 'react';
-import {Header, Card, Table, Container, Segment, Form, Input, Button} from 'semantic-ui-react';
+import {Table} from 'semantic-ui-react';
 
 class TransactionListElement extends React.Component {
-
     render(): React.ReactNode {
         return (
             <Table.Row>
-                <Table.Cell>{this.props.transaction.date}</Table.Cell>
+                <Table.Cell>{this.props.transaction.date.split('T')[0]}</Table.Cell>
                 <Table.Cell>{this.props.transaction.from}</Table.Cell>
                 <Table.Cell>{this.props.transaction.target}</Table.Cell>
                 <Table.Cell>{this.props.transaction.amount}</Table.Cell>
@@ -17,7 +16,7 @@ class TransactionListElement extends React.Component {
 }
 
 class TransactionList extends React.Component {
-    render(): React.ReactNode {
+    render() {
         return (
             <Table celled>
                 <Table.Header>
@@ -31,7 +30,7 @@ class TransactionList extends React.Component {
                 </Table.Header>
 
                 <Table.Body>
-                    {this.props.transactions.map(function (transaction) {
+                    {this.props.transactions.map((transaction) => {
                         return <TransactionListElement transaction={transaction}/>
                     })}
                 </Table.Body>

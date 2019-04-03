@@ -1,6 +1,6 @@
 import React from 'react';
 import NewTransaction from "./NewTransaction";
-import {Grid, Button, Divider, Card, Segment} from "semantic-ui-react";
+import {Card} from "semantic-ui-react";
 import LatestTransaction from "./LatestTransactions";
 
 const Dashboard = (props) => {
