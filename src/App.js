@@ -15,13 +15,12 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
+import AllTransactions from "./components/AllTransactions"
 import PrivateRoute from "./components/PrivateRoute";
 import * as api from "./api";
 import type {User} from "./api";
 
 // TODO: Move to own files
-const AllTransactions = () => <div/>;
-
 // The following are type definitions for Flow,
 // an optional type checker for JavaScript. You
 // can safely ignore them for now.
@@ -112,8 +111,8 @@ class App extends React.Component<Props, State> {
                             />
                             <Menu.Item
                                 name='transactions'
-                                active={pathname === '/transaction'}
-                                onClick={() => history.push('/transaction')}
+                                active={pathname === '/transactions'}
+                                onClick={() => history.push('/transactions')}
                             />
                             <Menu.Menu position='right'>
                                 <Menu.Item

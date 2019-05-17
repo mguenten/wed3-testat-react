@@ -7,6 +7,11 @@ class LatestTransactions extends React.Component {
     TIMEOUT = 3000;
     AMOUNT_OF_ELEMENTS = 5;
 
+    constructor(props) {
+        super(props);
+        this.getLatestTransactions(this.AMOUNT_OF_ELEMENTS);
+    }
+
     state = {
         transactions: [],
         serverError: false
@@ -22,7 +27,6 @@ class LatestTransactions extends React.Component {
     }
 
     render() {
-        this.getLatestTransactions(this.AMOUNT_OF_ELEMENTS);
         return (
             <Card style={{width: 'auto'}}>
                 <Card.Content extra={true}>
