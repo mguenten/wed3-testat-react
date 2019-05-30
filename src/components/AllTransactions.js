@@ -96,10 +96,12 @@ class AllTransactions extends React.Component {
                         <Card.Header>All Transactions</Card.Header>
                     </Card.Content>
                     <Card.Content>
-                        <Select placeholder='Select a year'
+                        <Select clearable
+                                placeholder='Select a year'
                                 options={this.state.selectableYears}
                                 onChange={this.handleYearChanged}/>
-                        <Select placeholder='Select a month'
+                        <Select clearable
+                                placeholder='Select a month'
                                 options={this.state.selectableMonths}
                                 onChange={this.handleMonthChanged}
                                 style={{marginLeft: '2%'}}/>
