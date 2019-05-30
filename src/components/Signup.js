@@ -1,5 +1,3 @@
-// @flow
-
 import React from "react";
 import {Redirect} from "react-router-dom";
 import {Header, Container, Segment, Form, Button} from 'semantic-ui-react'
@@ -65,7 +63,7 @@ class Signup extends React.Component<Props, State> {
     handleCancel = (event: Event) => {
         event.preventDefault();
         this.setState({redirectToReferrer: true, error: null});
-    }
+    };
 
     render() {
         const {redirectToReferrer, error} = this.state;

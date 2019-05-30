@@ -42,16 +42,16 @@ class AllTransactions extends React.Component {
     };
 
     updateTransactions = () => {
-        getTransactions(this.props.token, "", "", 1000)
+        getTransactions(this.props.token, "", "", Number.MAX_SAFE_INTEGER)
             .then(response => response.result)
             .then(transactions => {
                 let filteredTransactions = this.filterTransactions(transactions, this.state.selectedYear, this.state.selectedMonth);
-                if (filteredTransactions.length == 0) {
+                if (filteredTransactions.length === 0) {
                     filteredTransactions = transactions;
                 }
                 let selectableYears = new Map();
                 let selectableMonths = new Map();
-                filteredTransactions.map((transaction) => {
+                filteredTransactions.forEach((transaction) => {
                     let date = transaction.date.split('T')[0].split('-');
                     let year = date[0];
                     let month = date[1];
@@ -68,25 +68,16 @@ class AllTransactions extends React.Component {
 
     filterTransactions = (transactions, year, month) => {
         let filteredTransactions = [];
-        transactions.map((transaction) => {
+        transactions.forEach((transaction) => {
             let date = transaction.date.split('T')[0].split('-');
-            if ((year == date[0] && (month == null || month == ''))
-                || (month == date[1] && (year == null || year == ''))
-                || (year == date[0] && month == date[1])) {
+            if ((year === date[0] && (month === null || month === ''))
+                || (month === date[1] && (year === null || year === ''))
+                || (year === date[0] && month === date[1])) {
                 filteredTransactions.push(transaction);
             }
         });
         return filteredTransactions;
     };
-
-    async getTransactions() {
-        return await getTransactions(this.props.token, "", "")
-            .then((response) => response.result)
-            .catch(() => {
-                setTimeout(() => this.setState({serverError: false}), this.TIMEOUT);
-                this.setState({serverError: true});
-            });
-    }
 
     render() {
         return (

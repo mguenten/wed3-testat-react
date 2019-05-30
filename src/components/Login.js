@@ -1,5 +1,3 @@
-// @flow
-
 import React from "react";
 import {Redirect, Link} from "react-router-dom";
 import {Header, Container, Segment, Form, Input, Button} from 'semantic-ui-react'

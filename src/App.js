@@ -4,8 +4,6 @@ import React from "react";
 import {
     BrowserRouter as Router,
     Route,
-    Redirect,
-    Link,
     withRouter
 } from "react-router-dom";
 
@@ -84,7 +82,7 @@ class App extends React.Component<Props, State> {
     };
 
     render() {
-        const {isAuthenticated, user, token, activeItem} = this.state;
+        const {isAuthenticated, user, token} = this.state;
 
         const MenuBar = withRouter(({history, location: {pathname}}) => {
             if (isAuthenticated && user) {
@@ -95,7 +93,8 @@ class App extends React.Component<Props, State> {
                                 <Header as='h1' inverted>Bank of Rapperswil</Header>
                             </Grid.Column>
                             <Grid.Column verticalAlign='middle'>
-                                <Container textAlign='right' inverted='true'>{user.firstname} {user.lastname} ({user.accountNr})</Container>
+                                <Container textAlign='right'
+                                           inverted='true'>{user.firstname} {user.lastname} ({user.accountNr})</Container>
                             </Grid.Column>
                         </Grid>
                         <Menu inverted secondary>
