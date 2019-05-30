@@ -9,13 +9,17 @@ class LatestTransactions extends React.Component {
 
     constructor(props) {
         super(props);
-        this.getLatestTransactions(this.AMOUNT_OF_ELEMENTS);
+        this.forceUpdate();
     }
 
     state = {
         transactions: [],
         serverError: false
     };
+
+    forceUpdate(callBack: () => void): void {
+        this.getLatestTransactions(this.AMOUNT_OF_ELEMENTS);
+    }
 
     async getLatestTransactions(amount) {
         return await getTransactions(this.props.token, "", "", amount)

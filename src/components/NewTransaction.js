@@ -72,6 +72,7 @@ class NewTransaction extends React.Component {
                         inputError: false,
                         serverError: false
                     });
+                    this.props.updateTable();
                 })
                 .catch(() => {
                     setTimeout(() => this.setState({serverError: false}), this.TIMEOUT);
